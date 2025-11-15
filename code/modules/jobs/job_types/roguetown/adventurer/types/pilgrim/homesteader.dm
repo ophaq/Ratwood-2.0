@@ -173,50 +173,48 @@
 			// No stat changes for all-rounded
 
 	// INVENTORY SELECTION
-	// Bronze and Copper weapons and armor - ALL AVAILABLE
+	// Individual bronze and copper weapons and armor
 	var/bronze_copper_items = list(
 		"Bronze Arming Sword" = /obj/item/rogueweapon/sword/bronze,
-		"Bronze Axe" = /obj/item/rogueweapon/stoneaxe/woodcut/bronze,
-		"Bronze Dagger" = /obj/item/rogueweapon/huntingknife/bronze,
 		"Bronze Katar" = /obj/item/rogueweapon/katar/bronze,
-		"Bronze Knife" = /obj/item/rogueweapon/huntingknife/bronze,
 		"Bronze Knuckles" = /obj/item/rogueweapon/knuckles/bronzeknuckles,
 		"Bronze Mace" = /obj/item/rogueweapon/mace/bronze,
 		"Bronze Spear" = /obj/item/rogueweapon/spear/bronze,
 		"Bronze Whip" = /obj/item/rogueweapon/whip/bronze,
 
 		"Copper Cudgel" = /obj/item/rogueweapon/mace/cudgel/copper,
-		"Copper Dagger" = /obj/item/rogueweapon/huntingknife/copper,
 		"Copper Heart Protector" = /obj/item/clothing/suit/roguetown/armor/plate/half/copper,
-		"Copper Hatchet" = /obj/item/rogueweapon/stoneaxe/handaxe/copper,
-		"Copper Knife" = /obj/item/rogueweapon/huntingknife/copper,
 		"Copper Lamellar Cap" = /obj/item/clothing/head/roguetown/helmet/coppercap,
 		"Copper Messer" = /obj/item/rogueweapon/sword/short/messer/copper,
 		"Copper Rhomphaia" = /obj/item/rogueweapon/sword/long/rhomphaia/copper,
-		"Copper Spear" = /obj/item/rogueweapon/spear/stone/copper,
+		"Copper Spear" = /obj/item/rogueweapon/spear/stone/copper
+	)
 
-		"Leather Sheath" = /obj/item/rogueweapon/scabbard/sheath,
-		"Scabbard" = /obj/item/rogueweapon/scabbard/sword
+	// Bronze and Copper Daily Tools - preset combinations (Axe + Dagger/Knife + Sheath)
+	var/daily_tools_combos = list(
+		"Bronze Axe + Bronze Dagger + Sheath" = list(/obj/item/rogueweapon/stoneaxe/woodcut/bronze, /obj/item/rogueweapon/huntingknife/bronze, /obj/item/rogueweapon/scabbard/sheath),
+		"Bronze Axe + Bronze Knife + Sheath" = list(/obj/item/rogueweapon/stoneaxe/woodcut/bronze, /obj/item/rogueweapon/huntingknife/bronze, /obj/item/rogueweapon/scabbard/sheath),
+		"Copper Hatchet + Copper Dagger + Sheath" = list(/obj/item/rogueweapon/stoneaxe/handaxe/copper, /obj/item/rogueweapon/huntingknife/copper, /obj/item/rogueweapon/scabbard/sheath),
+		"Copper Hatchet + Copper Knife + Sheath" = list(/obj/item/rogueweapon/stoneaxe/handaxe/copper, /obj/item/rogueweapon/huntingknife/copper, /obj/item/rogueweapon/scabbard/sheath)
 	)
 
 	// Utility and Knowledge items
 	var/utility_knowledge_items = list(
 		"Bedroll" = /obj/item/bedroll,
-		"Chisel" = /obj/item/rogueweapon/chisel,
 		"Cooking Pan" = /obj/item/cooking/pan,
 		"Fishing Rod" = /obj/item/fishingrod/crafted,
 		"Folding Table" = /obj/item/contraption/folding_table_stored,
 		"Hammer" = /obj/item/rogueweapon/hammer/steel,
-		"Handsaw" = /obj/item/rogueweapon/handsaw,
 		"Hoe" = /obj/item/rogueweapon/hoe,
-		"Lantern" = /obj/item/flashlight/flare/torch/lantern,
 		"Lockpick Ring" = /obj/item/lockpickring/mundane,
+		"Alchemical Pouch" = /obj/item/storage/magebag,
+		"Hunting Bag" = /obj/item/storage/meatbag,
 		"Millstone" = /obj/item/millstone,
 		"Musical Instrument" = pick(subtypesof(/obj/item/rogue/instrument)),
 		"Pick" = /obj/item/rogueweapon/pick,
-		"Rope" = /obj/item/rope,
-		"Shovel" = /obj/item/rogueweapon/shovel/small,
+		"Scissors" = /obj/item/rogueweapon/huntingknife/scissors,
 		"Surgery Bag" = /obj/item/storage/belt/rogue/surgery_bag/full,
+		"Great Weapon Strap" = /obj/item/rogueweapon/scabbard/gwstrap,
 
 		"Diagnose Spell" = /obj/effect/proc_holder/spell/invoked/diagnose/secular,
 		"Find Familiar Spell" = /obj/effect/proc_holder/spell/self/findfamiliar,
@@ -224,9 +222,17 @@
 	)
 
 	if(H.mind)
-		// Select three bronze/copper weapons and armor
+		// Select one daily tools combo
+		var/combo_name = input(H, "Choose a daily tools combination [1/1].", "Daily Tools") as anything in daily_tools_combos
+		if(combo_name)
+			var/combo_list = daily_tools_combos[combo_name]
+			for(var/item_path in combo_list)
+				var/new_item = new item_path()
+				H.mind.special_items[combo_name] = new_item
+
+		// Select three individual bronze/copper items
 		for(var/i in 1 to 3)
-			var/bronze_copper_name = input(H, "Choose a bronze or copper tools [i]/3.", "Bronze/Copper Items") as anything in bronze_copper_items
+			var/bronze_copper_name = input(H, "Choose a bronze or copper item [i]/3.", "Bronze/Copper Items") as anything in bronze_copper_items
 			if(bronze_copper_name)
 				H.mind.special_items[bronze_copper_name] = bronze_copper_items[bronze_copper_name]
 				if(bronze_copper_name in bronze_copper_items)
@@ -287,6 +293,7 @@
 						/obj/item/reagent_containers/powder/salt = 1,
 						/obj/item/reagent_containers/food/snacks/rogue/cheddar = 2,
 						/obj/item/natural/cloth = 2,
+						/obj/item/flashlight/flare/torch/lantern = 1,
 //						/obj/item/book/rogue/yeoldecookingmanual = 1,
 //						/obj/item/natural/worms = 2,
 						/obj/item/rogueweapon/shovel/small = 1,
@@ -443,5 +450,3 @@
 				ADD_TRAIT(H, regular_traits[regular_trait_name], TRAIT_GENERIC)
 				if(regular_trait_name in regular_traits)
 					regular_traits -= regular_trait_name
-
-// Still random clothing... meh. Get your loadout ones.
