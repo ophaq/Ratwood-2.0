@@ -791,9 +791,10 @@
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town/cell)
 "aoa" = (
-/obj/structure/flora/ausbushes/reedbush,
-/turf/open/water/cleanshallow,
-/area/rogue/under/cavewet)
+/obj/structure/underworld/barrier,
+/obj/structure/underworld/barrier,
+/turf/open/floor/rogue/underworld/road,
+/area/rogue/underworld/adventurespawn)
 "aob" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/transparent/openspace,
@@ -18036,6 +18037,11 @@
 /turf/open/floor/rogue/church,
 /area/rogue/under/town/basement/keep)
 "fEJ" = (
+/obj/structure/underworld/barrier,
+/obj/effect/landmark/start/courtagent,
+/obj/effect/landmark/start/adventurerlate{
+	dir = 1
+	},
 /turf/open/floor/rogue/churchrough,
 /area/rogue/underworld{
 	first_time_text = "wayfarer's dream"
@@ -21163,14 +21169,14 @@
 /turf/open/floor/rogue/churchbrick,
 /area/rogue/indoors/town/manor/rockhill)
 "gzW" = (
-/obj/effect/wisp/prestidigitation{
-	desc = "A small, fiery ball of light made up of mystical energy.";
-	name = "Will-o'-the-wisp";
-	pixel_x = 0;
-	color = "#ff75b1"
+/obj/structure/underworld/barrier,
+/obj/structure/underworld/carriage{
+	pixel_x = -100
 	},
-/turf/open/floor/rogue/herringbone,
-/area/rogue/underworld/adventurespawn)
+/turf/open/floor/rogue/churchrough,
+/area/rogue/underworld{
+	first_time_text = "wayfarer's dream"
+	})
 "gAe" = (
 /obj/machinery/light/rogue/firebowl/stump,
 /turf/open/floor/rogue/cobblerock,
@@ -22053,11 +22059,6 @@
 "gPy" = (
 /turf/closed/wall/mineral/rogue/stone,
 /area/rogue/indoors/town/manor/rockhill)
-"gPA" = (
-/obj/item/natural/cloth,
-/obj/item/reagent_containers/glass/bucket,
-/turf/open/floor/rogue/churchrough,
-/area/rogue/indoors/town/shop)
 "gPJ" = (
 /obj/item/candle/yellow{
 	pixel_x = -8;
@@ -23939,6 +23940,11 @@
 /obj/item/natural/stone,
 /turf/open/floor/rogue/ruinedwood,
 /area/rogue/outdoors/bograt/above)
+"htt" = (
+/turf/open/floor/rogue/churchrough,
+/area/rogue/underworld{
+	first_time_text = "wayfarer's dream"
+	})
 "htA" = (
 /obj/machinery/light/roguestreet/orange{
 	dir = 1;
@@ -25431,10 +25437,6 @@
 	},
 /turf/open/floor/rogue/dirt,
 /area/rogue/under/cave/rhgoblinencampment)
-"hSK" = (
-/obj/structure/rack/rogue,
-/turf/open/floor/rogue/blocks,
-/area/rogue/indoors/town)
 "hSM" = (
 /obj/structure/stairs/stone{
 	dir = 1
@@ -34789,15 +34791,6 @@
 	},
 /turf/open/floor/carpet/inn,
 /area/rogue/indoors/town/manor/rockhill)
-"kRu" = (
-/obj/structure/underworld/barrier,
-/obj/structure/underworld/carriage{
-	pixel_x = -100
-	},
-/turf/open/floor/rogue/churchrough,
-/area/rogue/underworld{
-	first_time_text = "wayfarer's dream"
-	})
 "kRN" = (
 /obj/structure/table/wood,
 /obj/item/paper,
@@ -38741,10 +38734,9 @@
 /turf/open/floor/rogue/churchbrick,
 /area/rogue/indoors/town/church/chapel)
 "mgZ" = (
-/obj/structure/underworld/barrier,
-/obj/structure/underworld/barrier,
-/turf/open/floor/rogue/underworld/road,
-/area/rogue/underworld/adventurespawn)
+/obj/structure/flora/ausbushes/reedbush,
+/turf/open/water/cleanshallow,
+/area/rogue/under/cavewet)
 "mhc" = (
 /obj/machinery/tanningrack,
 /turf/open/floor/rogue/cobble/mossy,
@@ -42556,10 +42548,6 @@
 	},
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors/town/church/chapel)
-"nuU" = (
-/obj/item/grown/log/tree/stick,
-/turf/open/floor/rogue/ruinedwood/spiral,
-/area/rogue/indoors)
 "nuZ" = (
 /obj/structure/chair/stool/rogue,
 /turf/open/floor/rogue/herringbone,
@@ -46247,6 +46235,15 @@
 	icon_state = "vertw"
 	},
 /area/rogue/indoors/town)
+"oEt" = (
+/obj/effect/wisp/prestidigitation{
+	desc = "A small, fiery ball of light made up of mystical energy.";
+	name = "Will-o'-the-wisp";
+	pixel_x = 0;
+	color = "#ff75b1"
+	},
+/turf/open/floor/rogue/herringbone,
+/area/rogue/underworld/adventurespawn)
 "oEO" = (
 /obj/structure/flora/roguegrass,
 /obj/structure/flora/ausbushes/ppflowers,
@@ -61880,6 +61877,9 @@
 	},
 /turf/open/floor/rogue/hexstone,
 /area/rogue/indoors/town/bath)
+"tIH" = (
+/turf/closed,
+/area/rogue/indoors/town/magician)
 "tIK" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -62813,6 +62813,10 @@
 /obj/machinery/light/rogue/firebowl/standing/green,
 /turf/open/floor/rogue/grass,
 /area/rogue/outdoors/bograt/south)
+"tYU" = (
+/obj/item/grown/log/tree/stick,
+/turf/open/floor/rogue/ruinedwood/spiral,
+/area/rogue/indoors)
 "tZc" = (
 /obj/structure/bars,
 /turf/open/floor/rogue/blocks,
@@ -68001,15 +68005,10 @@
 /turf/open/floor/rogue/concrete,
 /area/rogue/indoors/town/bath)
 "vKR" = (
-/obj/structure/underworld/barrier,
-/obj/effect/landmark/start/courtagent,
-/obj/effect/landmark/start/adventurerlate{
-	dir = 1
-	},
+/obj/item/natural/cloth,
+/obj/item/reagent_containers/glass/bucket,
 /turf/open/floor/rogue/churchrough,
-/area/rogue/underworld{
-	first_time_text = "wayfarer's dream"
-	})
+/area/rogue/indoors/town/shop)
 "vKS" = (
 /obj/item/roguebin/water/gross,
 /turf/open/floor/rogue/ruinedwood,
@@ -71760,9 +71759,6 @@
 /obj/structure/flora/roguegrass,
 /turf/open/floor/rogue/dirt,
 /area/rogue/outdoors/town/rockhill)
-"wTE" = (
-/turf/closed,
-/area/rogue/indoors/town/magician)
 "wTL" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -74298,6 +74294,10 @@
 /obj/structure/rack/rogue/shelf/biggest,
 /turf/open/floor/rogue/concrete,
 /area/rogue/under/town/basement/keep)
+"xMb" = (
+/obj/structure/rack/rogue,
+/turf/open/floor/rogue/blocks,
+/area/rogue/indoors/town)
 "xMh" = (
 /obj/structure/rack/rogue/shelf/biggest,
 /obj/item/clothing/wrists/roguetown/splintarms,
@@ -153704,7 +153704,7 @@ wQS
 tRJ
 jap
 oNE
-aoa
+mgZ
 oNE
 oNE
 lGl
@@ -156726,7 +156726,7 @@ aad
 aad
 aad
 aad
-aoa
+mgZ
 aad
 aad
 aad
@@ -237347,7 +237347,7 @@ nqU
 xou
 dsu
 iDD
-nuU
+tYU
 jCh
 cyr
 jCh
@@ -241825,7 +241825,7 @@ emy
 fkC
 tEU
 omI
-wTE
+tIH
 idU
 mfK
 bmG
@@ -260452,7 +260452,7 @@ rSC
 rRb
 xaU
 qNP
-gPA
+vKR
 wpl
 xJE
 pBS
@@ -361563,7 +361563,7 @@ bQs
 bQs
 bQs
 qQl
-hSK
+xMb
 bQs
 bQs
 xlA
@@ -521297,7 +521297,7 @@ uxY
 qLk
 wMe
 ckz
-fEJ
+htt
 uxY
 jcS
 syY
@@ -521728,7 +521728,7 @@ tRv
 uxY
 uxY
 wMe
-vKR
+fEJ
 ckz
 uxY
 jcS
@@ -522147,7 +522147,7 @@ mEE
 uCH
 bMo
 dOv
-gzW
+oEt
 uxY
 sAO
 xdZ
@@ -522160,8 +522160,8 @@ rWJ
 uxY
 uxY
 wMe
-vKR
-kRu
+fEJ
+gzW
 uxY
 jcS
 syY
@@ -522592,7 +522592,7 @@ uxY
 uxY
 uxY
 wMe
-vKR
+fEJ
 ckz
 uxY
 jcS
@@ -523024,8 +523024,8 @@ tRv
 uxY
 uxY
 wMe
-vKR
-ckz
+wMe
+wMe
 vqs
 jcS
 syY
@@ -523455,9 +523455,9 @@ wMe
 uxY
 uxY
 uxY
+wMe
+wMe
 dsZ
-wMe
-wMe
 vqs
 jcS
 syY
@@ -523887,10 +523887,10 @@ wMe
 wMe
 uDi
 wMe
-dsZ
-dsZ
+wMe
+wMe
 oVf
-mgZ
+aoa
 kwk
 syY
 vIa
@@ -524322,7 +524322,7 @@ wMe
 wMe
 wMe
 wMe
-mgZ
+aoa
 jcS
 syY
 vIa
