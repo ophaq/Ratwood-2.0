@@ -145,17 +145,17 @@
 					if(penis.penis_size > MIN_PENIS_SIZE)
 						penis.penis_size--
 					else
-						pmax = FALSE
+						pmax = TRUE
 				if(testicles)
 					if(testicles.ball_size > MIN_TESTICLES_SIZE)
 						testicles.ball_size--
 					else
-						tmax = FALSE
+						tmax = TRUE
 				if(breasts)
 					if(breasts.breast_size > MIN_BREASTS_SIZE )
 						breasts.breast_size--
 					else
-						bmax = FALSE
+						bmax = TRUE
 				if(!penis && !testicles && !breasts) //nothing to change
 					arg = FALSE
 				if(!pmax && !tmax && !bmax) //nothing was able to change
@@ -173,17 +173,17 @@
 					if(penis.penis_size < MAX_PENIS_SIZE)
 						penis.penis_size++
 					else
-						pmax = FALSE
+						pmax = TRUE
 				if(testicles)
 					if(testicles.ball_size < MAX_TESTICLES_SIZE)
 						testicles.ball_size++
 					else
-						tmax = FALSE
+						tmax = TRUE
 				if(breasts)
 					if(breasts.breast_size < MAX_BREASTS_SIZE )
 						breasts.breast_size++
 					else
-						bmax = FALSE
+						bmax = TRUE
 				if(!penis && !testicles && !breasts) //nothing to change
 					arg = FALSE
 				if(!pmax && !tmax && !bmax) //nothing was able to change
