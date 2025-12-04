@@ -917,7 +917,7 @@
 			user.change_stat(STATKEY_LCK, 2)
 			user.add_stress(/datum/stressevent/dragon_scale)
 			ADD_TRAIT(user, TRAIT_DARKVISION, CULT_TRAIT)//Close enough to a cult. No duplicates beyond dreamer.
-			ADD_TRAIT(user, TRAIT_HARDDISMEMBER, CULT_TAIT)//Too angry to lose a limb, or something.
+			ADD_TRAIT(user, TRAIT_HARDDISMEMBER, CULT_TRAIT)//Too angry to lose a limb, or something.
 			ADD_TRAIT(user, TRAIT_IGNOREDAMAGESLOWDOWN, CULT_TRAIT)//Can't tag 'em to slow 'em.
 			armor = getArmor("blunt" = 100, "slash" = 100, "stab" = 100, "piercing" = 100, "fire" = 50, "acid" = 0)
 		else
