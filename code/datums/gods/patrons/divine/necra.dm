@@ -6,15 +6,16 @@
 	mob_traits = list(TRAIT_SOUL_EXAMINE, TRAIT_NOSTINK)	//No stink is generic but they deal with dead bodies so.. makes sense, I suppose?
 	miracles = list(/obj/effect/proc_holder/spell/targeted/touch/orison				= CLERIC_ORI,
 					/obj/effect/proc_holder/spell/invoked/necras_sight				= CLERIC_T0,
+					/obj/effect/proc_holder/spell/targeted/locate_dead				= CLERIC_T0,
 					/obj/effect/proc_holder/spell/invoked/lesser_heal				= CLERIC_T1,
 					/obj/effect/proc_holder/spell/invoked/blood_heal				= CLERIC_T1,
 					/obj/effect/proc_holder/spell/invoked/avert						= CLERIC_T1,
-					/obj/effect/proc_holder/spell/targeted/locate_dead				= CLERIC_T1,
-					/obj/effect/proc_holder/spell/invoked/speakwithdead				= CLERIC_T1
+					/obj/effect/proc_holder/spell/invoked/speakwithdead				= CLERIC_T1,
 					// /obj/effect/proc_holder/spell/invoked/deaths_door			= CLERIC_T1, // DO NOT RE-ENABLE UNTIL THIS IS FIXED. IT CRASHES CLIENTS.
 					/obj/effect/proc_holder/spell/targeted/abrogation				= CLERIC_T2,
 					/obj/effect/proc_holder/spell/invoked/raise_spirits_vengeance	= CLERIC_T2,
-					/obj/effect/proc_holder/spell/targeted/churn					= CLERIC_T3,
+					/obj/effect/proc_holder/spell/invoked/raise_spirit_respite		= CLERIC_T3,
+					/obj/effect/proc_holder/spell/targeted/churn					= CLERIC_T4,//Priest/Acolytes only. Thanks.
 	)
 	confess_lines = list(
 		"ALL SOULS FIND THEIR WAY TO NECRA!",

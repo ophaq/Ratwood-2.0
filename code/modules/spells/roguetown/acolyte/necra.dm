@@ -36,7 +36,7 @@
 	name = "Churn Undead"
 	desc = "Stuns and explodes undead."
 	range = 8//We return it, up from 4...
-	overlay_state = "necra"
+	overlay_state = "necra_ult"//Temp.
 	releasedrain = 30
 	chargetime = 6 SECONDS//Up from 2.
 	recharge_time = 2 MINUTES//Up from 60.
