@@ -724,7 +724,7 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 				<div style='background: rgba(123, 83, 83, 0.2); border: 1px solid [theme["border"]]; padding: 8px; margin-top: 8px; font-size: 0.7em;'>
 					<div style='font-weight: bold; color: [theme["text"]]; margin-bottom: 4px;'>⚠ Loadout Item Modifications:</div>
 					<div style='color: [theme["label"]]; line-height: 1.4;'>
-						<b>ARMOR:</b> Set to basic NORMAL clothing values (slash = 10, stab = 20) • Crit prevention removed • Armor class set to Light<br>
+						<b>ARMOR:</b> Set to armour minor protection (15 armor to all damage types) • Crit prevention removed • Armor class set to Light<br>
 						<b>WEAPONS:</b> Damage reduced by 30% • Weapon defense reduced by 50%<br>
 						<b>ALL ITEMS:</b> Sell price set to 0
 					</div>
@@ -1144,7 +1144,7 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 				GLOB.temp_loadout_selection = null
 				usr << browse(null, "window=loadout_select")
 				
-				// Initialize lists for available loadouts and selected loadouts at the start of the block
+				// Initialize lists for available loadouts and selected loadouts
 				var/list/loadouts_available = list()
 				var/list/selected_loadouts = list()
 				var/list/selected_items = list()
@@ -1276,7 +1276,6 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 					// Skip if already selected in another slot (but allow if it's the current slot's item)
 					var/datum/loadout_item/current_item = vars[slot_var]
 					if(item.type in selected_loadouts)
-						// Only skip if it's NOT the item currently in this slot
 						if(!current_item || current_item.type != item.type)
 							continue
 					
@@ -1287,13 +1286,14 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 					var/icon_file = initial(sample.icon)
 					var/icon_state_name = initial(sample.icon_state)
 					
-					// Send icon resource using cache
 					if(icon_file && icon_state_name)
 						var/cache_key = "[icon_file]_[icon_state_name]"
 						if(!(cache_key in GLOB.cached_loadout_icons))
-						// Prevent cache from growing too large
-						if(GLOB.cached_loadout_icons.len >= MAX_ICON_CACHE_SIZE)
-							GLOB.cached_loadout_icons.Cut(1, 50) // Remove oldest 50 entries
+							if(GLOB.cached_loadout_icons.len >= MAX_ICON_CACHE_SIZE)
+								GLOB.cached_loadout_icons.Cut(1, 50)
+							GLOB.cached_loadout_icons[cache_key] = icon(icon_file, icon_state_name)
+						usr << browse_rsc(GLOB.cached_loadout_icons[cache_key], "loadout_select_[icon_counter].png")
+					
 					var/display_name = item.name
 					var/cost_text = ""
 					if(item.triumph_cost)
@@ -1324,24 +1324,22 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 							var items = document.getElementsByClassName('item-entry');
 							var idx;
 							for(idx = 0; idx < items.length; idx++) {
-								var itemName = items\[idx].getAttribute('data-name').toLowerCase();
+								var itemName = items\[idx\].getAttribute('data-name').toLowerCase();
 								if(itemName.includes(searchValue)) {
-									items\[idx].classList.remove('hidden');
+									items\[idx\].classList.remove('hidden');
 								} else {
-									items\[idx].classList.add('hidden');
+									items\[idx\].classList.add('hidden');
 								}
 							}
 						}
 					</script>
-					</body>
-					</html>
+				</body>
+				</html>
 				"}
 				
-				// Small delay to ensure window closes/refreshes properly
-				sleep(1)
-				usr << browse(html, "window=loadout_select;size=500x600")
-				// Store the available items temporarily for callback
+				// Store the available items temporarily for callback and show window
 				GLOB.temp_loadout_selection = list("prefs" = src, "items" = loadouts_available, "slot" = slot)
+				usr << browse(html, "window=loadout_select;size=500x700")
 				return
 			
 			if("clear")
@@ -1351,6 +1349,7 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 				vars["loadout_[slot]_hex"] = null
 				save_character()
 				open_vices_menu(usr)
+				return
 			
 			if("rename")
 				var/datum/loadout_item/current = vars[slot_var]
@@ -1363,6 +1362,7 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 					vars["loadout_[slot]_name"] = new_name
 					save_character()
 					open_vices_menu(usr)
+				return
 			
 			if("describe")
 				var/datum/loadout_item/current = vars[slot_var]
@@ -1375,6 +1375,7 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 					vars["loadout_[slot]_desc"] = new_desc
 					save_character()
 					open_vices_menu(usr)
+				return
 			
 			if("color")
 				var/datum/loadout_item/current = vars[slot_var]
@@ -1391,6 +1392,7 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 						vars["loadout_[slot]_hex"] = new_color
 					save_character()
 					open_vices_menu(usr)
+				return
 	
 	if(href_list["language_action"])
 		var/action = href_list["language_action"]
@@ -1507,4 +1509,6 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 						vars[slot_var] = language_path
 						to_chat(usr, span_notice("Selected [chosen_language] for language slot [slot] ([slot_cost] Triumphs)."))
 					save_character()
+				open_vices_menu(usr)
+				save_character()
 				open_vices_menu(usr)

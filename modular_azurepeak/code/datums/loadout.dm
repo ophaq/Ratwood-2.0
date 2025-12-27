@@ -610,6 +610,15 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	name = "Shalal Belt"
 	path = /obj/item/storage/belt/rogue/leather/shalal
 
+// BELTS
+/datum/loadout_item/belt_cloth
+	name = "Cloth Sash"
+	path = /obj/item/storage/belt/rogue/leather/cloth
+
+/datum/loadout_item/belt_rope
+	name = "Rope Belt"
+	path = /obj/item/storage/belt/rogue/leather/rope
+
 /datum/loadout_item/psicross
 	name = "Psydonian Cross"
 	path = /obj/item/clothing/neck/roguetown/psicross
@@ -662,6 +671,44 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	name = "silver wedding band"
 	path = /obj/item/clothing/ring/band
 
+// GEMSTONE RINGS - GOLD
+/datum/loadout_item/ring_gold_diamond
+	name = "Dorpel Ring (Gold)"
+	path = /obj/item/clothing/ring/diamond
+
+/datum/loadout_item/ring_gold_ruby
+	name = "Rontz Ring (Gold)"
+	path = /obj/item/clothing/ring/ruby
+
+/datum/loadout_item/ring_gold_emerald
+	name = "Gemerald Ring (Gold)"
+	path = /obj/item/clothing/ring/emerald
+
+/datum/loadout_item/ring_gold_sapphire
+	name = "Saffira Ring (Gold)"
+	path = /obj/item/clothing/ring/sapphire
+
+/datum/loadout_item/ring_gold_topaz
+	name = "Toper Ring (Gold)"
+	path = /obj/item/clothing/ring/topaz
+
+/datum/loadout_item/ring_gold_quartz
+	name = "Blortz Ring (Gold)"
+	path = /obj/item/clothing/ring/quartz
+
+// SIMPLE RINGS
+/datum/loadout_item/ring_gold
+	name = "Gold Ring"
+	path = /obj/item/clothing/ring/gold
+
+/datum/loadout_item/ring_silver
+	name = "Silver Ring"
+	path = /obj/item/clothing/ring/silver
+
+/datum/loadout_item/ring_blacksteel
+	name = "Blacksteel Ring"
+	path = /obj/item/clothing/ring/blacksteel
+
 /datum/loadout_item/chaperon
     name = "Chaperon (Normal)"
     path = /obj/item/clothing/head/roguetown/chaperon
@@ -693,6 +740,19 @@ GLOBAL_LIST_EMPTY(loadout_items)
 /datum/loadout_item/zcross_iron
 	name = "Zizo Cross"
 	path = /obj/item/clothing/neck/roguetown/zcross/iron
+
+// NECKLACES & AMULETS
+/datum/loadout_item/skull_amulet
+	name = "Skull Amulet"
+	path = /obj/item/clothing/neck/roguetown/skullamulet
+
+/datum/loadout_item/collar_feldcollar
+	name = "Feldcollar"
+	path = /obj/item/clothing/neck/roguetown/collar/feldcollar
+
+/datum/loadout_item/collar_surgcollar
+	name = "Surgcollar"
+	path = /obj/item/clothing/neck/roguetown/collar/surgcollar
 
 // MASKS
 /datum/loadout_item/skullmask

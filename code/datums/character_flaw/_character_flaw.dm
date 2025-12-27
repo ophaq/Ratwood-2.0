@@ -67,9 +67,15 @@ GLOBAL_LIST_INIT(character_flaws, list(
 /mob/living/carbon/human/get_flaw(flaw_type)
 	if(!flaw_type)
 		return
-	if(charflaw != flaw_type)
-		return
-	return charflaw
+	// Check new multiple vices system
+	if(length(vices))
+		for(var/datum/charflaw/vice in vices)
+			if(istype(vice, flaw_type))
+				return vice
+	// Legacy single vice check
+	if(istype(charflaw, flaw_type))
+		return charflaw
+	return
 
 /datum/charflaw/randflaw
 	name = "Random or None"

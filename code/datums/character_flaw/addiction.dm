@@ -1,17 +1,44 @@
 /mob/proc/sate_addiction()
 	return
 
-/mob/living/carbon/human/sate_addiction()
-	if(istype(charflaw, /datum/charflaw/addiction))
-		var/datum/charflaw/addiction/A = charflaw
-		if(!A.sated)
-			to_chat(src, span_blue(A.sated_text))
-		A.sated = TRUE
-		A.time = initial(A.time) //reset roundstart sate offset to standard
-		A.next_sate = world.time + A.time
-		remove_stress(A.stress_event)  // Remove vice-specific stress event
-		if(A.debuff)
-			remove_status_effect(A.debuff)
+/mob/living/carbon/human/sate_addiction(addiction_type)
+	var/datum/charflaw/addiction/A
+
+	// If a specific addiction type is requested, only sate that one.
+	if(addiction_type)
+		if(length(vices))
+			for(var/datum/charflaw/vice in vices)
+				if(istype(vice, addiction_type))
+					A = vice
+					break
+		if(!A && istype(charflaw, addiction_type))
+			A = charflaw
+	else
+		// Otherwise, try to find an addiction vice (prefer an unsated one).
+		if(length(vices))
+			for(var/datum/charflaw/vice in vices)
+				if(!istype(vice, /datum/charflaw/addiction))
+					continue
+				var/datum/charflaw/addiction/candidate = vice
+				if(!A)
+					A = candidate
+					continue
+				if(A.sated && !candidate.sated)
+					A = candidate
+		if(!A && istype(charflaw, /datum/charflaw/addiction))
+			A = charflaw
+
+	if(!A)
+		return
+
+	if(!A.sated)
+		to_chat(src, span_blue(A.sated_text))
+	A.sated = TRUE
+	A.time = initial(A.time) //reset roundstart sate offset to standard
+	A.next_sate = world.time + A.time
+	remove_stress(A.stress_event)  // Remove vice-specific stress event
+	if(A.debuff)
+		remove_status_effect(A.debuff)
 
 /datum/charflaw/addiction
 	var/next_sate = 0

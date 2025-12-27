@@ -983,7 +983,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 									C.armor_class = ARMOR_CLASS_LIGHT
 								// Set all loadout armor to basic padded values
 								if(C.armor)
-									C.armor = ARMOR_CLOTHING
+									C.armor = ARMOR_MIND_PROTECTION
 								// Set max integrity to light armor base
 								C.max_integrity = ARMOR_INT_CHEST_LIGHT_BASE
 							

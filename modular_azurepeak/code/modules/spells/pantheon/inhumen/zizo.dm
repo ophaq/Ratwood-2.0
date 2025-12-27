@@ -187,9 +187,6 @@
 				possible_parts -= BP
 				break
 
-	var/obj/item/bodypart/the_part = pick(possible_parts)
-	var/obj/item/bodypart/part_to_bonify = user.get_bodypart(the_part.body_zone)
-
 	var/list/choices = list()
 	var/list/spell_choices = GLOB.learnable_spells
 	for(var/i = 1, i <= spell_choices.len, i++)
