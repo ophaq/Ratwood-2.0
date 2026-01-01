@@ -575,18 +575,52 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["loadout_preset_1"] >> preset1_json
 	S["loadout_preset_2"] >> preset2_json
 	S["loadout_preset_3"] >> preset3_json
+	
+	// Load and validate preset 1
 	if(preset1_json)
-		loadout_preset_1 = json_decode(preset1_json)
+		var/decoded = json_decode(preset1_json)
+		if(decoded && istype(decoded, /list))
+			loadout_preset_1 = decoded
+		else
+			loadout_preset_1 = null
 	else
 		loadout_preset_1 = null
+	
+	// Load and validate preset 2
 	if(preset2_json)
-		loadout_preset_2 = json_decode(preset2_json)
+		var/decoded = json_decode(preset2_json)
+		if(decoded && istype(decoded, /list))
+			loadout_preset_2 = decoded
+		else
+			loadout_preset_2 = null
 	else
 		loadout_preset_2 = null
+	
+	// Load and validate preset 3
 	if(preset3_json)
-		loadout_preset_3 = json_decode(preset3_json)
+		var/decoded = json_decode(preset3_json)
+		if(decoded && istype(decoded, /list))
+			loadout_preset_3 = decoded
+		else
+			loadout_preset_3 = null
 	else
 		loadout_preset_3 = null
+
+/datum/preferences/proc/_save_loadout_presets(S)
+	// Save loadout presets as JSON
+	if(loadout_preset_1)
+		WRITE_FILE(S["loadout_preset_1"] , json_encode(loadout_preset_1))
+	else
+		WRITE_FILE(S["loadout_preset_1"] , null)
+	if(loadout_preset_2)
+		WRITE_FILE(S["loadout_preset_2"] , json_encode(loadout_preset_2))
+	else
+		WRITE_FILE(S["loadout_preset_2"] , null)
+	if(loadout_preset_3)
+		WRITE_FILE(S["loadout_preset_3"] , json_encode(loadout_preset_3))
+	else
+		WRITE_FILE(S["loadout_preset_3"] , null)
+
 
 /datum/preferences/proc/_load_loadout_colours(S)
 	S["loadout_1_hex"] >> loadout_1_hex
@@ -1000,9 +1034,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["char_accent"] , char_accent)
 	WRITE_FILE(S["voice_type"] , voice_type)
 	WRITE_FILE(S["pronouns"] , pronouns)
-	WRITE_FILE(S["statpack"] , statpack.type)
-	WRITE_FILE(S["virtue"] , virtue.type)
-	WRITE_FILE(S["virtuetwo"], virtuetwo.type)
+	WRITE_FILE(S["statpack"] , statpack?.type)
+	WRITE_FILE(S["virtue"] , virtue?.type)
+	WRITE_FILE(S["virtuetwo"], virtuetwo?.type)
 	WRITE_FILE(S["race_bonus"], race_bonus)
 	WRITE_FILE(S["combat_music"], combat_music.type)
 	WRITE_FILE(S["body_size"] , features["body_size"])
@@ -1051,19 +1085,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	else
 		WRITE_FILE(S["loadout10"] , null)
 
-	// Save loadout presets as JSON
-	if(loadout_preset_1)
-		WRITE_FILE(S["loadout_preset_1"] , json_encode(loadout_preset_1))
-	else
-		WRITE_FILE(S["loadout_preset_1"] , null)
-	if(loadout_preset_2)
-		WRITE_FILE(S["loadout_preset_2"] , json_encode(loadout_preset_2))
-	else
-		WRITE_FILE(S["loadout_preset_2"] , null)
-	if(loadout_preset_3)
-		WRITE_FILE(S["loadout_preset_3"] , json_encode(loadout_preset_3))
-	else
-		WRITE_FILE(S["loadout_preset_3"] , null)
+	_save_loadout_presets(S)
+
 
 	WRITE_FILE(S["loadout_1_hex"], loadout_1_hex)
 	WRITE_FILE(S["loadout_2_hex"], loadout_2_hex)

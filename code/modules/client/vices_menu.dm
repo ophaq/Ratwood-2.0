@@ -366,14 +366,14 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 		return FALSE
 	
 	var/list/preset = list(
-		"statpack" = statpack,
-		"virtue" = virtue,
-		"virtuetwo" = virtuetwo,
-		"vice1" = vice1,
-		"vice2" = vice2,
-		"vice3" = vice3,
-		"vice4" = vice4,
-		"vice5" = vice5,
+		"statpack" = statpack?.type,
+		"virtue" = virtue?.type,
+		"virtuetwo" = virtuetwo?.type,
+		"vice1" = vice1?.type,
+		"vice2" = vice2?.type,
+		"vice3" = vice3?.type,
+		"vice4" = vice4?.type,
+		"vice5" = vice5?.type,
 		"loadout" = loadout?.type,
 		"loadout2" = loadout2?.type,
 		"loadout3" = loadout3?.type,
@@ -427,21 +427,133 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 		return FALSE
 	
 	var/list/preset = vars["loadout_preset_[preset_slot]"]
-	if(!preset || !preset.len)
+	if(!preset || !istype(preset, /list) || !preset.len)
 		return FALSE
 	
 	// Save current state to history before loading preset
 	save_to_history()
 	
-	// Restore all values from preset
-	statpack = preset["statpack"]
-	virtue = preset["virtue"]
-	virtuetwo = preset["virtuetwo"]
-	vice1 = preset["vice1"]
-	vice2 = preset["vice2"]
-	vice3 = preset["vice3"]
-	vice4 = preset["vice4"]
-	vice5 = preset["vice5"]
+	// Restore all values from preset with validation
+	var/statpack_type = preset["statpack"]
+	if(statpack_type)
+		// Handle both old format (datum instance) and new format (type path)
+		if(ispath(statpack_type, /datum/statpack))
+			statpack = new statpack_type()
+		else if(istype(statpack_type, /datum/statpack))
+			var/datum/statpack/old_datum = statpack_type
+			if(old_datum.type)
+				statpack = new old_datum.type
+			else
+				statpack = new /datum/statpack/wildcard/fated()
+		else
+			statpack = new /datum/statpack/wildcard/fated()
+	else
+		statpack = new /datum/statpack/wildcard/fated()
+	
+	var/virtue_type = preset["virtue"]
+	if(virtue_type)
+		if(ispath(virtue_type, /datum/virtue))
+			virtue = new virtue_type()
+		else if(istype(virtue_type, /datum/virtue))
+			var/datum/virtue/old_datum = virtue_type
+			if(old_datum.type)
+				virtue = new old_datum.type
+			else
+				virtue = new /datum/virtue/none()
+		else
+			virtue = new /datum/virtue/none()
+	else
+		virtue = new /datum/virtue/none()
+	
+	var/virtuetwo_type = preset["virtuetwo"]
+	if(virtuetwo_type)
+		if(ispath(virtuetwo_type, /datum/virtue))
+			virtuetwo = new virtuetwo_type()
+		else if(istype(virtuetwo_type, /datum/virtue))
+			var/datum/virtue/old_datum = virtuetwo_type
+			if(old_datum.type)
+				virtuetwo = new old_datum.type
+			else
+				virtuetwo = new /datum/virtue/none()
+		else
+			virtuetwo = new /datum/virtue/none()
+	else
+		virtuetwo = new /datum/virtue/none()
+	
+	var/vice1_type = preset["vice1"]
+	if(vice1_type)
+		if(ispath(vice1_type, /datum/charflaw))
+			vice1 = new vice1_type()
+		else if(istype(vice1_type, /datum/charflaw))
+			var/datum/charflaw/old_datum = vice1_type
+			if(old_datum.type)
+				vice1 = new old_datum.type
+			else
+				vice1 = null
+		else
+			vice1 = null
+	else
+		vice1 = null
+	
+	var/vice2_type = preset["vice2"]
+	if(vice2_type)
+		if(ispath(vice2_type, /datum/charflaw))
+			vice2 = new vice2_type()
+		else if(istype(vice2_type, /datum/charflaw))
+			var/datum/charflaw/old_datum = vice2_type
+			if(old_datum.type)
+				vice2 = new old_datum.type
+			else
+				vice2 = null
+		else
+			vice2 = null
+	else
+		vice2 = null
+	
+	var/vice3_type = preset["vice3"]
+	if(vice3_type)
+		if(ispath(vice3_type, /datum/charflaw))
+			vice3 = new vice3_type()
+		else if(istype(vice3_type, /datum/charflaw))
+			var/datum/charflaw/old_datum = vice3_type
+			if(old_datum.type)
+				vice3 = new old_datum.type
+			else
+				vice3 = null
+		else
+			vice3 = null
+	else
+		vice3 = null
+	
+	var/vice4_type = preset["vice4"]
+	if(vice4_type)
+		if(ispath(vice4_type, /datum/charflaw))
+			vice4 = new vice4_type()
+		else if(istype(vice4_type, /datum/charflaw))
+			var/datum/charflaw/old_datum = vice4_type
+			if(old_datum.type)
+				vice4 = new old_datum.type
+			else
+				vice4 = null
+		else
+			vice4 = null
+	else
+		vice4 = null
+	
+	var/vice5_type = preset["vice5"]
+	if(vice5_type)
+		if(ispath(vice5_type, /datum/charflaw))
+			vice5 = new vice5_type()
+		else if(istype(vice5_type, /datum/charflaw))
+			var/datum/charflaw/old_datum = vice5_type
+			if(old_datum.type)
+				vice5 = new old_datum.type
+			else
+				vice5 = null
+		else
+			vice5 = null
+	else
+		vice5 = null
 	
 	// Load loadout types and instantiate them if valid
 	var/loadout_type = preset["loadout"]
@@ -503,39 +615,73 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 		loadout10 = new loadout_type10()
 	else
 		loadout10 = null
-	loadout_1_name = preset["loadout_1_name"]
-	loadout_2_name = preset["loadout_2_name"]
-	loadout_3_name = preset["loadout_3_name"]
-	loadout_4_name = preset["loadout_4_name"]
-	loadout_5_name = preset["loadout_5_name"]
-	loadout_6_name = preset["loadout_6_name"]
-	loadout_7_name = preset["loadout_7_name"]
-	loadout_8_name = preset["loadout_8_name"]
-	loadout_9_name = preset["loadout_9_name"]
-	loadout_10_name = preset["loadout_10_name"]
-	loadout_1_desc = preset["loadout_1_desc"]
-	loadout_2_desc = preset["loadout_2_desc"]
-	loadout_3_desc = preset["loadout_3_desc"]
-	loadout_4_desc = preset["loadout_4_desc"]
-	loadout_5_desc = preset["loadout_5_desc"]
-	loadout_6_desc = preset["loadout_6_desc"]
-	loadout_7_desc = preset["loadout_7_desc"]
-	loadout_8_desc = preset["loadout_8_desc"]
-	loadout_9_desc = preset["loadout_9_desc"]
-	loadout_10_desc = preset["loadout_10_desc"]
-	loadout_1_hex = preset["loadout_1_hex"]
-	loadout_2_hex = preset["loadout_2_hex"]
-	loadout_3_hex = preset["loadout_3_hex"]
-	loadout_4_hex = preset["loadout_4_hex"]
-	loadout_5_hex = preset["loadout_5_hex"]
-	loadout_6_hex = preset["loadout_6_hex"]
-	loadout_7_hex = preset["loadout_7_hex"]
-	loadout_8_hex = preset["loadout_8_hex"]
-	loadout_9_hex = preset["loadout_9_hex"]
-	loadout_10_hex = preset["loadout_10_hex"]
-	extra_language = preset["extra_language"]
-	extra_language_1 = preset["extra_language_1"]
-	extra_language_2 = preset["extra_language_2"]
+	// Safely restore string values with validation
+	if(preset["loadout_1_name"])
+		loadout_1_name = preset["loadout_1_name"]
+	if(preset["loadout_2_name"])
+		loadout_2_name = preset["loadout_2_name"]
+	if(preset["loadout_3_name"])
+		loadout_3_name = preset["loadout_3_name"]
+	if(preset["loadout_4_name"])
+		loadout_4_name = preset["loadout_4_name"]
+	if(preset["loadout_5_name"])
+		loadout_5_name = preset["loadout_5_name"]
+	if(preset["loadout_6_name"])
+		loadout_6_name = preset["loadout_6_name"]
+	if(preset["loadout_7_name"])
+		loadout_7_name = preset["loadout_7_name"]
+	if(preset["loadout_8_name"])
+		loadout_8_name = preset["loadout_8_name"]
+	if(preset["loadout_9_name"])
+		loadout_9_name = preset["loadout_9_name"]
+	if(preset["loadout_10_name"])
+		loadout_10_name = preset["loadout_10_name"]
+	if(preset["loadout_1_desc"])
+		loadout_1_desc = preset["loadout_1_desc"]
+	if(preset["loadout_2_desc"])
+		loadout_2_desc = preset["loadout_2_desc"]
+	if(preset["loadout_3_desc"])
+		loadout_3_desc = preset["loadout_3_desc"]
+	if(preset["loadout_4_desc"])
+		loadout_4_desc = preset["loadout_4_desc"]
+	if(preset["loadout_5_desc"])
+		loadout_5_desc = preset["loadout_5_desc"]
+	if(preset["loadout_6_desc"])
+		loadout_6_desc = preset["loadout_6_desc"]
+	if(preset["loadout_7_desc"])
+		loadout_7_desc = preset["loadout_7_desc"]
+	if(preset["loadout_8_desc"])
+		loadout_8_desc = preset["loadout_8_desc"]
+	if(preset["loadout_9_desc"])
+		loadout_9_desc = preset["loadout_9_desc"]
+	if(preset["loadout_10_desc"])
+		loadout_10_desc = preset["loadout_10_desc"]
+	if(preset["loadout_1_hex"])
+		loadout_1_hex = preset["loadout_1_hex"]
+	if(preset["loadout_2_hex"])
+		loadout_2_hex = preset["loadout_2_hex"]
+	if(preset["loadout_3_hex"])
+		loadout_3_hex = preset["loadout_3_hex"]
+	if(preset["loadout_4_hex"])
+		loadout_4_hex = preset["loadout_4_hex"]
+	if(preset["loadout_5_hex"])
+		loadout_5_hex = preset["loadout_5_hex"]
+	if(preset["loadout_6_hex"])
+		loadout_6_hex = preset["loadout_6_hex"]
+	if(preset["loadout_7_hex"])
+		loadout_7_hex = preset["loadout_7_hex"]
+	if(preset["loadout_8_hex"])
+		loadout_8_hex = preset["loadout_8_hex"]
+	if(preset["loadout_9_hex"])
+		loadout_9_hex = preset["loadout_9_hex"]
+	if(preset["loadout_10_hex"])
+		loadout_10_hex = preset["loadout_10_hex"]
+	if(preset["extra_language"])
+		extra_language = preset["extra_language"]
+	if(preset["extra_language_1"])
+		extra_language_1 = preset["extra_language_1"]
+	if(preset["extra_language_2"])
+		extra_language_2 = preset["extra_language_2"]
 	
 	return TRUE
 
@@ -556,13 +702,27 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 	
 	// Build summary string
 	var/summary = ""
-	var/datum/statpack/sp = preset["statpack"]
-	if(sp)
-		summary += "[sp.name]"
 	
-	var/datum/virtue/v = preset["virtue"]
-	if(v && v.name != "None")
-		summary += " | [v.name]"
+	// Handle both type paths (new format) and datum instances (old format)
+	var/statpack_data = preset["statpack"]
+	if(statpack_data)
+		if(ispath(statpack_data, /datum/statpack))
+			var/datum/statpack/sp_temp = new statpack_data()
+			summary += "[sp_temp.name]"
+		else if(istype(statpack_data, /datum/statpack))
+			var/datum/statpack/sp = statpack_data
+			summary += "[sp.name]"
+	
+	var/virtue_data = preset["virtue"]
+	if(virtue_data)
+		if(ispath(virtue_data, /datum/virtue))
+			var/datum/virtue/v_temp = new virtue_data()
+			if(v_temp.name != "None")
+				summary += " | [v_temp.name]"
+		else if(istype(virtue_data, /datum/virtue))
+			var/datum/virtue/v = virtue_data
+			if(v.name != "None")
+				summary += " | [v.name]"
 	
 	// Count vices
 	var/vice_count = 0
@@ -915,35 +1075,42 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 			<div class="statpack-current">"}
 	
 	// Build statpack name with stats inline
-	var/stats_string = statpack.generate_modifier_string()
-	if(stats_string)
-		html += "<div class='statpack-name'>[statpack.name] <span class='statpack-stats'>" + stats_string + "</span></div>"
+	if(statpack)
+		var/stats_string = statpack.generate_modifier_string()
+		if(stats_string)
+			html += "<div class='statpack-name'>[statpack.name] <span class='statpack-stats'>" + stats_string + "</span></div>"
+		else
+			html += "<div class='statpack-name'>[statpack.name]</div>"
+		html += {"<div class="statpack-desc">[statpack.desc]</div>"}
 	else
-		html += "<div class='statpack-name'>[statpack.name]</div>"
+		html += "<div class='statpack-name'>None Selected</div>"
 	
-	html += {"<div class="statpack-desc">[statpack.desc]</div>
-			</div>
+	html += {"		</div>
 			<div class="actions">
 				<a class='btn btn-select' href='byond://?src=\ref[src];statpack_action=change'>Change Statpack</a>
 		</div>
-	</div>		<div class="statpack-section">
+	</div>
+		<div class="statpack-section">
 			<h2>Virtue Selection</h2>
-			<div class="statpack-current">
-				<div class="statpack-name">Primary Virtue: [virtue.name]</div>
-				<div class="statpack-desc">[virtue.desc]</div>"}
+			<div class="statpack-current">"}
 	
-	if(virtue.custom_text)
+	var/virtue_name = virtue ? virtue.name : "None"
+	var/virtue_desc = virtue ? virtue.desc : ""
+	html += "<div class=\"statpack-name\">Primary Virtue: [virtue_name]</div>"
+	html += "<div class=\"statpack-desc\">[virtue_desc]</div>"
+	
+	if(virtue && virtue.custom_text)
 		html += "<div class='statpack-stats' style='margin-top: 4px;'>" + virtue.custom_text + "</div>"
 	
 	// Display traits granted
-	if(LAZYLEN(virtue.added_traits))
+	if(virtue && LAZYLEN(virtue.added_traits))
 		html += "<div class='statpack-stats' style='margin-top: 8px;'><strong>Traits granted:</strong><br>"
 		for(var/trait in virtue.added_traits)
 			html += "• [trait]<br>"
 		html += "</div>"
 	
 	// Display skills granted
-	if(LAZYLEN(virtue.added_skills))
+	if(virtue && LAZYLEN(virtue.added_skills))
 		html += "<div class='statpack-stats' style='margin-top: 8px;'><strong>Skills granted:</strong><br>"
 		for(var/skill in virtue.added_skills)
 			if(!islist(skill))
@@ -958,7 +1125,7 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 		html += "</div>"
 	
 	// Display stashed items
-	if(LAZYLEN(virtue.added_stashed_items))
+	if(virtue && LAZYLEN(virtue.added_stashed_items))
 		html += "<div class='statpack-stats' style='margin-top: 8px;'><strong>Stashed items:</strong><br>"
 		for(var/item_name in virtue.added_stashed_items)
 			html += "• [item_name]<br>"
@@ -966,7 +1133,7 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 	
 	html += "</div>"
 	
-	if(statpack.name == "Virtuous")
+	if(statpack && statpack.name == "Virtuous" && virtuetwo)
 		html += {"
 		<div class=\"statpack-current\" style='margin-top: 10px;'>
 			<div class=\"statpack-name\">Second Virtue: [virtuetwo.name]</div>
