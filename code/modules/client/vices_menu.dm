@@ -641,73 +641,45 @@ GLOBAL_LIST_EMPTY(cached_loadout_icons)
 		loadout10 = new loadout_type10()
 	else
 		loadout10 = null
-	// Safely restore string values with validation
-	if(preset["loadout_1_name"])
-		loadout_1_name = preset["loadout_1_name"]
-	if(preset["loadout_2_name"])
-		loadout_2_name = preset["loadout_2_name"]
-	if(preset["loadout_3_name"])
-		loadout_3_name = preset["loadout_3_name"]
-	if(preset["loadout_4_name"])
-		loadout_4_name = preset["loadout_4_name"]
-	if(preset["loadout_5_name"])
-		loadout_5_name = preset["loadout_5_name"]
-	if(preset["loadout_6_name"])
-		loadout_6_name = preset["loadout_6_name"]
-	if(preset["loadout_7_name"])
-		loadout_7_name = preset["loadout_7_name"]
-	if(preset["loadout_8_name"])
-		loadout_8_name = preset["loadout_8_name"]
-	if(preset["loadout_9_name"])
-		loadout_9_name = preset["loadout_9_name"]
-	if(preset["loadout_10_name"])
-		loadout_10_name = preset["loadout_10_name"]
-	if(preset["loadout_1_desc"])
-		loadout_1_desc = preset["loadout_1_desc"]
-	if(preset["loadout_2_desc"])
-		loadout_2_desc = preset["loadout_2_desc"]
-	if(preset["loadout_3_desc"])
-		loadout_3_desc = preset["loadout_3_desc"]
-	if(preset["loadout_4_desc"])
-		loadout_4_desc = preset["loadout_4_desc"]
-	if(preset["loadout_5_desc"])
-		loadout_5_desc = preset["loadout_5_desc"]
-	if(preset["loadout_6_desc"])
-		loadout_6_desc = preset["loadout_6_desc"]
-	if(preset["loadout_7_desc"])
-		loadout_7_desc = preset["loadout_7_desc"]
-	if(preset["loadout_8_desc"])
-		loadout_8_desc = preset["loadout_8_desc"]
-	if(preset["loadout_9_desc"])
-		loadout_9_desc = preset["loadout_9_desc"]
-	if(preset["loadout_10_desc"])
-		loadout_10_desc = preset["loadout_10_desc"]
-	if(preset["loadout_1_hex"])
-		loadout_1_hex = preset["loadout_1_hex"]
-	if(preset["loadout_2_hex"])
-		loadout_2_hex = preset["loadout_2_hex"]
-	if(preset["loadout_3_hex"])
-		loadout_3_hex = preset["loadout_3_hex"]
-	if(preset["loadout_4_hex"])
-		loadout_4_hex = preset["loadout_4_hex"]
-	if(preset["loadout_5_hex"])
-		loadout_5_hex = preset["loadout_5_hex"]
-	if(preset["loadout_6_hex"])
-		loadout_6_hex = preset["loadout_6_hex"]
-	if(preset["loadout_7_hex"])
-		loadout_7_hex = preset["loadout_7_hex"]
-	if(preset["loadout_8_hex"])
-		loadout_8_hex = preset["loadout_8_hex"]
-	if(preset["loadout_9_hex"])
-		loadout_9_hex = preset["loadout_9_hex"]
-	if(preset["loadout_10_hex"])
-		loadout_10_hex = preset["loadout_10_hex"]
-	if(preset["extra_language"])
-		extra_language = preset["extra_language"]
-	if(preset["extra_language_1"])
-		extra_language_1 = preset["extra_language_1"]
-	if(preset["extra_language_2"])
-		extra_language_2 = preset["extra_language_2"]
+	
+	// Always restore all string values from preset (including null/empty values)
+	loadout_1_name = preset["loadout_1_name"]
+	loadout_2_name = preset["loadout_2_name"]
+	loadout_3_name = preset["loadout_3_name"]
+	loadout_4_name = preset["loadout_4_name"]
+	loadout_5_name = preset["loadout_5_name"]
+	loadout_6_name = preset["loadout_6_name"]
+	loadout_7_name = preset["loadout_7_name"]
+	loadout_8_name = preset["loadout_8_name"]
+	loadout_9_name = preset["loadout_9_name"]
+	loadout_10_name = preset["loadout_10_name"]
+	
+	loadout_1_desc = preset["loadout_1_desc"]
+	loadout_2_desc = preset["loadout_2_desc"]
+	loadout_3_desc = preset["loadout_3_desc"]
+	loadout_4_desc = preset["loadout_4_desc"]
+	loadout_5_desc = preset["loadout_5_desc"]
+	loadout_6_desc = preset["loadout_6_desc"]
+	loadout_7_desc = preset["loadout_7_desc"]
+	loadout_8_desc = preset["loadout_8_desc"]
+	loadout_9_desc = preset["loadout_9_desc"]
+	loadout_10_desc = preset["loadout_10_desc"]
+	
+	loadout_1_hex = preset["loadout_1_hex"]
+	loadout_2_hex = preset["loadout_2_hex"]
+	loadout_3_hex = preset["loadout_3_hex"]
+	loadout_4_hex = preset["loadout_4_hex"]
+	loadout_5_hex = preset["loadout_5_hex"]
+	loadout_6_hex = preset["loadout_6_hex"]
+	loadout_7_hex = preset["loadout_7_hex"]
+	loadout_8_hex = preset["loadout_8_hex"]
+	loadout_9_hex = preset["loadout_9_hex"]
+	loadout_10_hex = preset["loadout_10_hex"]
+	
+	// Always set languages from preset (including null/empty values)
+	extra_language = preset["extra_language"]
+	extra_language_1 = preset["extra_language_1"]
+	extra_language_2 = preset["extra_language_2"]
 	
 	return TRUE
 

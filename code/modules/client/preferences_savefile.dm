@@ -9,6 +9,17 @@
 //	This also works with decimals.
 #define SAVEFILE_VERSION_MAX	36
 
+// Safely extract a type path from datums or type values; returns null if unset/invalid.
+/proc/preferences_typepath_or_null(value)
+	if(isnull(value))
+		return null
+	if(ispath(value))
+		return value
+	if(istype(value, /datum))
+		var/datum/D = value
+		return D.type
+	return null
+
 /*
 SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Carn
 	This proc checks if the current directory of the savefile S needs updating
@@ -416,20 +427,14 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 /datum/preferences/proc/_load_flaw(S)
 	var/charflaw_type
 	S["charflaw"]			>> charflaw_type
-	if(charflaw_type)
+	if(charflaw_type && ispath(charflaw_type))
 		charflaw = new charflaw_type()
 	else
 		charflaw = pick(GLOB.character_flaws)
 		charflaw = GLOB.character_flaws[charflaw]
 		charflaw = new charflaw()
 	
-	// Load new vice system - ALWAYS reset to null first to prevent carryover
-	vice1 = null
-	vice2 = null
-	vice3 = null
-	vice4 = null
-	vice5 = null
-	
+	// Load new vice system
 	var/vice1_type, vice2_type, vice3_type, vice4_type, vice5_type
 	S["vice1"] >> vice1_type
 	S["vice2"] >> vice2_type
@@ -437,8 +442,15 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["vice4"] >> vice4_type
 	S["vice5"] >> vice5_type
 	
-	// Only instantiate if type path exists in savefile
-	vice1 = (vice1_type && ispath(vice1_type)) ? new vice1_type() : null
+	// Vice1 is required - pick a random one if invalid
+	if(vice1_type && ispath(vice1_type))
+		vice1 = new vice1_type()
+	else
+		var/random_vice = pick(GLOB.character_flaws)
+		var/random_vice_path = GLOB.character_flaws[random_vice]
+		vice1 = new random_vice_path()
+	
+	// Other vices are optional
 	vice2 = (vice2_type && ispath(vice2_type)) ? new vice2_type() : null
 	vice3 = (vice3_type && ispath(vice3_type)) ? new vice3_type() : null
 	vice4 = (vice4_type && ispath(vice4_type)) ? new vice4_type() : null
@@ -456,7 +468,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 /datum/preferences/proc/_load_statpack(S)
 	var/statpack_type
 	S["statpack"] >> statpack_type
-	if (statpack_type)
+	if (statpack_type && ispath(statpack_type))
 		statpack = new statpack_type()
 	else
 		statpack = pick(GLOB.statpacks)
@@ -464,10 +476,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		//statpack = new statpack
 
 /datum/preferences/proc/_load_virtue(S)
-	// Always reset virtues to null first to prevent carryover
-	virtue = null
-	virtuetwo = null
-	
 	var/virtue_type
 	var/virtuetwo_type
 	S["virtue"] >> virtue_type
@@ -487,82 +495,52 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 /datum/preferences/proc/_load_loadout(S)
 	var/loadout_type
 	S["loadout"] >> loadout_type
-	if (loadout_type)
-		loadout = new loadout_type()
-	else
-		loadout = null
+	loadout = (loadout_type && ispath(loadout_type)) ? new loadout_type() : null
 
 /datum/preferences/proc/_load_loadout2(S)
 	var/loadout_type2
 	S["loadout2"] >> loadout_type2
-	if (loadout_type2)
-		loadout2 = new loadout_type2()
-	else
-		loadout2 = null
+	loadout2 = (loadout_type2 && ispath(loadout_type2)) ? new loadout_type2() : null
 
 /datum/preferences/proc/_load_loadout3(S)
 	var/loadout_type3
 	S["loadout3"] >> loadout_type3
-	if (loadout_type3)
-		loadout3 = new loadout_type3()
-	else
-		loadout3 = null
+	loadout3 = (loadout_type3 && ispath(loadout_type3)) ? new loadout_type3() : null
 
 /datum/preferences/proc/_load_loadout4(S)
 	var/loadout_type4
 	S["loadout4"] >> loadout_type4
-	if (loadout_type4)
-		loadout4 = new loadout_type4()
-	else
-		loadout4 = null
+	loadout4 = (loadout_type4 && ispath(loadout_type4)) ? new loadout_type4() : null
 
 /datum/preferences/proc/_load_loadout5(S)
 	var/loadout_type5
 	S["loadout5"] >> loadout_type5
-	if (loadout_type5)
-		loadout5 = new loadout_type5()
-	else
-		loadout5 = null
+	loadout5 = (loadout_type5 && ispath(loadout_type5)) ? new loadout_type5() : null
 
 /datum/preferences/proc/_load_loadout6(S)
 	var/loadout_type6
 	S["loadout6"] >> loadout_type6
-	if (loadout_type6)
-		loadout6 = new loadout_type6()
-	else
-		loadout6 = null
+	loadout6 = (loadout_type6 && ispath(loadout_type6)) ? new loadout_type6() : null
 
 /datum/preferences/proc/_load_loadout7(S)
 	var/loadout_type7
 	S["loadout7"] >> loadout_type7
-	if (loadout_type7)
-		loadout7 = new loadout_type7()
-	else
-		loadout7 = null
+	loadout7 = (loadout_type7 && ispath(loadout_type7)) ? new loadout_type7() : null
 
 /datum/preferences/proc/_load_loadout8(S)
 	var/loadout_type8
 	S["loadout8"] >> loadout_type8
-	if (loadout_type8)
-		loadout8 = new loadout_type8()
-	else
-		loadout8 = null
+	loadout8 = (loadout_type8 && ispath(loadout_type8)) ? new loadout_type8() : null
 
 /datum/preferences/proc/_load_loadout9(S)
 	var/loadout_type9
 	S["loadout9"] >> loadout_type9
-	if (loadout_type9)
-		loadout9 = new loadout_type9()
-	else
-		loadout9 = null
+	loadout9 = (loadout_type9 && ispath(loadout_type9)) ? new loadout_type9() : null
 
 /datum/preferences/proc/_load_loadout10(S)
 	var/loadout_type10
 	S["loadout10"] >> loadout_type10
-	if (loadout_type10)
-		loadout10 = new loadout_type10()
-	else
-		loadout10 = null
+	loadout10 = (loadout_type10 && ispath(loadout_type10)) ? new loadout_type10() : null
 
 /datum/preferences/proc/_load_loadout_presets(S)
 	var/preset1_json
@@ -605,17 +583,19 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 /datum/preferences/proc/_save_loadout_presets(S)
 	// Save loadout presets as JSON
 	if(loadout_preset_1)
-		WRITE_FILE(S["loadout_preset_1"] , json_encode(loadout_preset_1))
+		WRITE_FILE(S["loadout_preset_1"], json_encode(loadout_preset_1))
 	else
-		WRITE_FILE(S["loadout_preset_1"] , null)
+		WRITE_FILE(S["loadout_preset_1"], null)
+	
 	if(loadout_preset_2)
-		WRITE_FILE(S["loadout_preset_2"] , json_encode(loadout_preset_2))
+		WRITE_FILE(S["loadout_preset_2"], json_encode(loadout_preset_2))
 	else
-		WRITE_FILE(S["loadout_preset_2"] , null)
+		WRITE_FILE(S["loadout_preset_2"], null)
+	
 	if(loadout_preset_3)
-		WRITE_FILE(S["loadout_preset_3"] , json_encode(loadout_preset_3))
+		WRITE_FILE(S["loadout_preset_3"], json_encode(loadout_preset_3))
 	else
-		WRITE_FILE(S["loadout_preset_3"] , null)
+		WRITE_FILE(S["loadout_preset_3"], null)
 
 
 /datum/preferences/proc/_load_loadout_colours(S)
@@ -777,12 +757,13 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	_load_combat_music(S)
 	_load_barks(S)
 
-	if(!S["features["mcolor"]"] || S["features["mcolor"]"] == "#000")
-		WRITE_FILE(S["features["mcolor"]"]	, "#FFF")
-	if(!S["features["mcolor2"]"] || S["features["mcolor2"]"] == "#000")
-		WRITE_FILE(S["features["mcolor2"]"]	, "#FFF")
-	if(!S["features["mcolor3"]"] || S["features["mcolor3"]"] == "#000")
-		WRITE_FILE(S["features["mcolor3"]"]	, "#FFF")
+	// These are stored under the "feature_*" keys (see save_character + _load_appearence).
+	if(!S["feature_mcolor"] || S["feature_mcolor"] == "#000")
+		WRITE_FILE(S["feature_mcolor"]	, "#FFF")
+	if(!S["feature_mcolor2"] || S["feature_mcolor2"] == "#000")
+		WRITE_FILE(S["feature_mcolor2"]	, "#FFF")
+	if(!S["feature_mcolor3"] || S["feature_mcolor3"] == "#000")
+		WRITE_FILE(S["feature_mcolor3"]	, "#FFF")
 
 	if(!S["feature_ethcolor"] || S["feature_ethcolor"] == "#000")
 		WRITE_FILE(S["feature_ethcolor"], "9c3030")
@@ -800,6 +781,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 			selected_patron = GLOB.patronlist[default_patron]
 		if(selected_patron.disabled_patron) //double failsafe
 			selected_patron = GLOB.patronlist[default_patron]
+	else
+		// No patron saved, set default
+		selected_patron = GLOB.patronlist[default_patron]
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
@@ -936,7 +920,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	var/savefile/S = new /savefile(path)
 	if(!S)
 		return FALSE
-	S.cd = "/character[default_slot]"
+	var/slot = sanitize_integer(default_slot, 1, max_save_slots, initial(default_slot))
+	default_slot = slot
+	S.cd = "/character[slot]"
 
 	WRITE_FILE(S["version"]			, SAVEFILE_VERSION_MAX)	//load_character will sanitize any bad data, so assume up-to-date.)
 
@@ -963,14 +949,14 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["jumpsuit_style"]		, jumpsuit_style)
 	WRITE_FILE(S["uplink_loc"]			, uplink_spawn_loc)
 	WRITE_FILE(S["randomise"]			, randomise)
-	WRITE_FILE(S["species"]				, pref_species.name)
-	WRITE_FILE(S["charflaw"]			, charflaw?.type)
+	WRITE_FILE(S["species"]				, pref_species?.name)
+	WRITE_FILE(S["charflaw"]				, preferences_typepath_or_null(charflaw))
 	// Save new vice system
-	WRITE_FILE(S["vice1"], vice1?.type)
-	WRITE_FILE(S["vice2"], vice2?.type)
-	WRITE_FILE(S["vice3"], vice3?.type)
-	WRITE_FILE(S["vice4"], vice4?.type)
-	WRITE_FILE(S["vice5"], vice5?.type)
+	WRITE_FILE(S["vice1"], preferences_typepath_or_null(vice1))
+	WRITE_FILE(S["vice2"], preferences_typepath_or_null(vice2))
+	WRITE_FILE(S["vice3"], preferences_typepath_or_null(vice3))
+	WRITE_FILE(S["vice4"], preferences_typepath_or_null(vice4))
+	WRITE_FILE(S["vice5"], preferences_typepath_or_null(vice5))
 	WRITE_FILE(S["feature_mcolor"]		, features["mcolor"])
 	WRITE_FILE(S["feature_mcolor2"]		, features["mcolor2"])
 	WRITE_FILE(S["feature_mcolor3"]		, features["mcolor3"])
@@ -1000,11 +986,13 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["all_quirks"]			, all_quirks)
 
 	//Patron
-	WRITE_FILE(S["selected_patron"]		, selected_patron.type)
+	WRITE_FILE(S["selected_patron"]		, preferences_typepath_or_null(selected_patron))
 
 	// Organs
 	WRITE_FILE(S["customizer_entries"] , customizer_entries)
-	// Body markings and descriptors already saved earlier to prevent corruption
+	WRITE_FILE(S["body_markings"] , body_markings)
+	WRITE_FILE(S["descriptor_entries"] , descriptor_entries)
+	WRITE_FILE(S["custom_descriptors"] , custom_descriptors)
 
 	//Barks
 	WRITE_FILE(S["bark_id"]					, bark_id)
@@ -1026,33 +1014,33 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["char_accent"] , char_accent)
 	WRITE_FILE(S["voice_type"] , voice_type)
 	WRITE_FILE(S["pronouns"] , pronouns)
-	WRITE_FILE(S["statpack"] , statpack?.type)
+	WRITE_FILE(S["statpack"] , preferences_typepath_or_null(statpack))
 	// Save virtues with explicit null-safety
-	if(virtue && virtue.type)
-		WRITE_FILE(S["virtue"] , virtue.type)
-	else
-		WRITE_FILE(S["virtue"] , /datum/virtue/none)
-	if(virtuetwo && virtuetwo.type)
-		WRITE_FILE(S["virtuetwo"], virtuetwo.type)
-	else
-		WRITE_FILE(S["virtuetwo"], /datum/virtue/none)
+	var/virtue_typepath = preferences_typepath_or_null(virtue)
+	if(!virtue_typepath)
+		virtue_typepath = /datum/virtue/none
+	WRITE_FILE(S["virtue"] , virtue_typepath)
+	var/virtue2_typepath = preferences_typepath_or_null(virtuetwo)
+	if(!virtue2_typepath)
+		virtue2_typepath = /datum/virtue/none
+	WRITE_FILE(S["virtuetwo"], virtue2_typepath)
 	WRITE_FILE(S["race_bonus"], race_bonus)
-	WRITE_FILE(S["combat_music"], combat_music?.type)
+	WRITE_FILE(S["combat_music"], preferences_typepath_or_null(combat_music))
 	WRITE_FILE(S["body_size"] , features["body_size"])
 	WRITE_FILE(S["nsfwflavortext"] , html_decode(nsfwflavortext))
 	WRITE_FILE(S["erpprefs"] , html_decode(erpprefs))
 	WRITE_FILE(S["img_gallery"] , img_gallery)
 	WRITE_FILE(S["nsfw_img_gallery"] , nsfw_img_gallery)
-	WRITE_FILE(S["loadout"] , loadout?.type)
-	WRITE_FILE(S["loadout2"] , loadout2?.type)
-	WRITE_FILE(S["loadout3"] , loadout3?.type)
-	WRITE_FILE(S["loadout4"] , loadout4?.type)
-	WRITE_FILE(S["loadout5"] , loadout5?.type)
-	WRITE_FILE(S["loadout6"] , loadout6?.type)
-	WRITE_FILE(S["loadout7"] , loadout7?.type)
-	WRITE_FILE(S["loadout8"] , loadout8?.type)
-	WRITE_FILE(S["loadout9"] , loadout9?.type)
-	WRITE_FILE(S["loadout10"] , loadout10?.type)
+	WRITE_FILE(S["loadout"] , preferences_typepath_or_null(loadout))
+	WRITE_FILE(S["loadout2"] , preferences_typepath_or_null(loadout2))
+	WRITE_FILE(S["loadout3"] , preferences_typepath_or_null(loadout3))
+	WRITE_FILE(S["loadout4"] , preferences_typepath_or_null(loadout4))
+	WRITE_FILE(S["loadout5"] , preferences_typepath_or_null(loadout5))
+	WRITE_FILE(S["loadout6"] , preferences_typepath_or_null(loadout6))
+	WRITE_FILE(S["loadout7"] , preferences_typepath_or_null(loadout7))
+	WRITE_FILE(S["loadout8"] , preferences_typepath_or_null(loadout8))
+	WRITE_FILE(S["loadout9"] , preferences_typepath_or_null(loadout9))
+	WRITE_FILE(S["loadout10"] , preferences_typepath_or_null(loadout10))
 
 	_save_loadout_presets(S)
 
@@ -1090,14 +1078,14 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["loadout_9_desc"], loadout_9_desc)
 	WRITE_FILE(S["loadout_10_desc"], loadout_10_desc)
 	//Familiar Files
-	WRITE_FILE(S["familiar_name"] , familiar_prefs.familiar_name)
-	WRITE_FILE(S["familiar_pronouns"] , familiar_prefs.familiar_pronouns)
-	WRITE_FILE(S["familiar_specie"] , familiar_prefs.familiar_specie)
-	WRITE_FILE(S["familiar_headshot_link"] , familiar_prefs.familiar_headshot_link)
-	WRITE_FILE(S["familiar_flavortext"] , familiar_prefs.familiar_flavortext)
-	WRITE_FILE(S["familiar_ooc_notes"] , familiar_prefs.familiar_ooc_notes)
-	WRITE_FILE(S["familiar_ooc_extra"] , familiar_prefs.familiar_ooc_extra)
-	WRITE_FILE(S["familiar_ooc_extra_link"] , familiar_prefs.familiar_ooc_extra_link)
+	WRITE_FILE(S["familiar_name"] , familiar_prefs?.familiar_name)
+	WRITE_FILE(S["familiar_pronouns"] , familiar_prefs?.familiar_pronouns)
+	WRITE_FILE(S["familiar_specie"] , familiar_prefs?.familiar_specie)
+	WRITE_FILE(S["familiar_headshot_link"] , familiar_prefs?.familiar_headshot_link)
+	WRITE_FILE(S["familiar_flavortext"] , familiar_prefs?.familiar_flavortext)
+	WRITE_FILE(S["familiar_ooc_notes"] , familiar_prefs?.familiar_ooc_notes)
+	WRITE_FILE(S["familiar_ooc_extra"] , familiar_prefs?.familiar_ooc_extra)
+	WRITE_FILE(S["familiar_ooc_extra_link"] , familiar_prefs?.familiar_ooc_extra_link)
 
 	return TRUE
 

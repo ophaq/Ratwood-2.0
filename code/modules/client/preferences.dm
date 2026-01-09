@@ -2724,25 +2724,25 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 	return 1
 
 /datum/preferences/proc/resolve_loadout_to_color(item_path)
-	if (loadout && (item_path == loadout.path) && loadout_1_hex)
+	if (loadout && (item_path == loadout.path) && loadout_1_hex && length(loadout_1_hex))
 		return loadout_1_hex
-	if (loadout2 && (item_path == loadout2.path) && loadout_2_hex)
+	if (loadout2 && (item_path == loadout2.path) && loadout_2_hex && length(loadout_2_hex))
 		return loadout_2_hex
-	if (loadout3 && (item_path == loadout3.path) && loadout_3_hex)
+	if (loadout3 && (item_path == loadout3.path) && loadout_3_hex && length(loadout_3_hex))
 		return loadout_3_hex
-	if (loadout4 && (item_path == loadout4.path) && loadout_4_hex)
+	if (loadout4 && (item_path == loadout4.path) && loadout_4_hex && length(loadout_4_hex))
 		return loadout_4_hex
-	if (loadout5 && (item_path == loadout5.path) && loadout_5_hex)
+	if (loadout5 && (item_path == loadout5.path) && loadout_5_hex && length(loadout_5_hex))
 		return loadout_5_hex
-	if (loadout6 && (item_path == loadout6.path) && loadout_6_hex)
+	if (loadout6 && (item_path == loadout6.path) && loadout_6_hex && length(loadout_6_hex))
 		return loadout_6_hex
-	if (loadout7 && (item_path == loadout7.path) && loadout_7_hex)
+	if (loadout7 && (item_path == loadout7.path) && loadout_7_hex && length(loadout_7_hex))
 		return loadout_7_hex
-	if (loadout8 && (item_path == loadout8.path) && loadout_8_hex)
+	if (loadout8 && (item_path == loadout8.path) && loadout_8_hex && length(loadout_8_hex))
 		return loadout_8_hex
-	if (loadout9 && (item_path == loadout9.path) && loadout_9_hex)
+	if (loadout9 && (item_path == loadout9.path) && loadout_9_hex && length(loadout_9_hex))
 		return loadout_9_hex
-	if (loadout10 && (item_path == loadout10.path) && loadout_10_hex)
+	if (loadout10 && (item_path == loadout10.path) && loadout_10_hex && length(loadout_10_hex))
 		return loadout_10_hex
 
 	return FALSE
