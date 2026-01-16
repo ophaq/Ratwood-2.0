@@ -42,7 +42,7 @@
 	else
 		to_chat(user, span_warning("[container] is full."))
 
-// Blood-to-milk conversion for deathless beings (revenants, constructs, etc. with TRAIT_NOHUNGER)
+// Blood-to-milk conversion for deathless beings (revenants, vampires, etc. with TRAIT_NOHUNGER)
 /mob/living/carbon/human/proc/try_blood_milking(mob/living/user, obj/item/reagent_containers/glass/container)
 	// Check container space first
 	if(container.reagents.total_volume >= container.reagents.maximum_volume)
