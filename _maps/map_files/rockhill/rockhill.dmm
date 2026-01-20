@@ -8824,14 +8824,6 @@
 	},
 /turf/open/floor/rogue/woodturned,
 /area/rogue/indoors/town/tavern)
-"cJh" = (
-/obj/structure/mineral_door/wood/red{
-	locked = 1;
-	lockid = "tavern";
-	name = "Tapsers' Quarters"
-	},
-/turf/open/floor/rogue/woodturned,
-/area/rogue/under/town/basement/tavern)
 "cJs" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -22083,13 +22075,6 @@
 /obj/structure/flora/roguegrass,
 /turf/open/floor/rogue/dirt,
 /area/rogue/under/cave)
-"gEu" = (
-/obj/structure/closet/crate/roguecloset,
-/obj/item/clothing/suit/roguetown/shirt/dress/gen/black,
-/obj/item/clothing/cloak/apron/waist,
-/obj/machinery/light/rogue/wallfire/candle/l,
-/turf/open/floor/carpet/inn,
-/area/rogue/under/town/basement/tavern)
 "gEx" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
@@ -27388,12 +27373,6 @@
 /obj/structure/flora/roguegrass,
 /turf/open/floor/rogue/grassyel,
 /area/rogue/outdoors/town/grove)
-"ikA" = (
-/obj/structure/bed/rogue/inn,
-/obj/item/bedsheet/rogue/fabric,
-/obj/effect/landmark/start/knavewench,
-/turf/open/floor/carpet/inn,
-/area/rogue/under/town/basement/tavern)
 "ikD" = (
 /obj/structure/fluff/statue/gargoyle,
 /turf/open/floor/rogue/ruinedwood/spiral,
@@ -27431,12 +27410,6 @@
 /obj/structure/bed/rogue/inn/wool,
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/town/manor/rockhill)
-"ilq" = (
-/obj/structure/closet/crate/roguecloset,
-/obj/item/clothing/suit/roguetown/shirt/dress/gen/black,
-/obj/item/clothing/cloak/apron/waist,
-/turf/open/floor/carpet/inn,
-/area/rogue/under/town/basement/tavern)
 "ilt" = (
 /obj/structure/stairs/stone{
 	dir = 1
@@ -34529,13 +34502,6 @@
 	},
 /turf/open/floor/rogue/ruinedwood,
 /area/rogue/indoors)
-"kuB" = (
-/obj/structure/closet/crate/roguecloset,
-/obj/item/clothing/suit/roguetown/shirt/dress/gen/black,
-/obj/item/clothing/cloak/apron/waist,
-/obj/machinery/light/rogue/wallfire/candle/r,
-/turf/open/floor/carpet/inn,
-/area/rogue/under/town/basement/tavern)
 "kuH" = (
 /obj/structure/fluff/railing/fence{
 	dir = 8
@@ -38336,13 +38302,6 @@
 	icon_state = "wooden_floor2"
 	},
 /area/rogue/indoors/town/shop)
-"lII" = (
-/obj/structure/bed/rogue/inn,
-/obj/item/bedsheet/rogue/fabric,
-/obj/machinery/light/rogue/wallfire/candle/l,
-/obj/effect/landmark/start/knavewench,
-/turf/open/floor/carpet/inn,
-/area/rogue/under/town/basement/tavern)
 "lIK" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -43094,13 +43053,6 @@
 /obj/structure/bed/rogue/inn/hay,
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/cave/rhgoblinencampment)
-"ngh" = (
-/obj/structure/bed/rogue/inn,
-/obj/item/bedsheet/rogue/fabric,
-/obj/machinery/light/rogue/wallfire/candle/r,
-/obj/effect/landmark/start/knavewench,
-/turf/open/floor/carpet/inn,
-/area/rogue/under/town/basement/tavern)
 "ngi" = (
 /obj/structure/fermentation_keg,
 /turf/open/floor/rogue/blocks,
@@ -56526,10 +56478,6 @@
 	},
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/indoors)
-"rsk" = (
-/obj/machinery/light/rogue/wallfire/candle/r,
-/turf/open/floor/rogue/woodturned,
-/area/rogue/under/town/basement/tavern)
 "rsn" = (
 /obj/machinery/tanningrack,
 /turf/open/floor/rogue/wood,
@@ -65604,7 +65552,7 @@
 /obj/item/reagent_containers/glass/bottle,
 /obj/item/reagent_containers/glass/bottle,
 /obj/item/reagent_containers/glass/bottle,
-/turf/open/floor/rogue/dirt/road,
+/turf/open/floor/rogue/cobblerock,
 /area/rogue/under/town/basement/tavern)
 "ujy" = (
 /obj/structure/roguemachine/scomm/r,
@@ -136002,10 +135950,10 @@ whb
 whb
 whb
 whb
-xeg
-xeg
-xeg
-xeg
+whb
+whb
+whb
+whb
 xeg
 sFx
 sFx
@@ -136434,10 +136382,10 @@ whb
 whb
 whb
 whb
-xeg
-lII
-wDf
-gEu
+whb
+whb
+whb
+whb
 xeg
 sFx
 sFx
@@ -136866,10 +136814,10 @@ cip
 fkC
 fkC
 whb
-xeg
-ilq
-wDf
-ikA
+whb
+whb
+whb
+whb
 xeg
 sFx
 sFx
@@ -137298,10 +137246,10 @@ jZd
 jZd
 fkC
 fkC
-xeg
-ikA
-wDf
-ilq
+whb
+whb
+whb
+whb
 xeg
 kJh
 pqD
@@ -137730,10 +137678,10 @@ oZj
 jZd
 bYO
 fkC
-xeg
-kuB
-wDf
-ngh
+whb
+whb
+whb
+whb
 xeg
 xeg
 ycv
@@ -138162,10 +138110,10 @@ avY
 jZd
 tuP
 cip
-xeg
-xeg
-cJh
-xeg
+whb
+whb
+whb
+whb
 xeg
 xeg
 xeg
@@ -138595,10 +138543,10 @@ vJv
 vJv
 cip
 whb
+whb
+whb
+whb
 xeg
-wDf
-lHS
-wDf
 wDf
 wDf
 wDf
@@ -139027,13 +138975,13 @@ vJv
 jZd
 cip
 cip
+whb
+whb
+whb
 xeg
-wDf
-wDf
-wDf
-wDf
-rsk
-wDf
+fJP
+kWx
+fJP
 lOm
 xJX
 rpp
@@ -139459,10 +139407,10 @@ jZd
 jZd
 jZd
 cip
+whb
+whb
+whb
 xeg
-fJP
-kWx
-fJP
 xeg
 xeg
 xeg
@@ -139891,11 +139839,11 @@ cBa
 jZd
 jZd
 cip
-xeg
-xeg
-xeg
-xeg
-xeg
+whb
+whb
+whb
+whb
+whb
 whb
 nvH
 nvH
