@@ -154,31 +154,46 @@
 		var/obj/item/bodypart/affecting = H.get_bodypart(check_zone(user.zone_selected))
 		if(!affecting)
 			return
-		var/used_time = 70
-		if(user.mind)
-			used_time -= (user.get_skill_level(/datum/skill/craft/engineering) * 10)
-		playsound(loc, 'sound/items/bsmith1.ogg', 100, FALSE)
-		if(!do_mob(user, M, used_time))
-			return
-		playsound(loc, 'sound/items/bsmith4.ogg', 100, FALSE)
 
-		var/list/wCount = H.get_wounds()
-		H.adjustBruteLoss(-10)
-		H.adjustFireLoss(-10)
-		H.update_damage_overlays()
-		if(wCount.len > 0)
-			if(M == user)
-				H.heal_wounds(2)
+		while(affecting.get_damage() != 0 || length(affecting.wounds))
+			var/used_time = 7 SECONDS
+			var/skill_used = /datum/skill/craft/engineering // used for adding experience.
+			var/mob/living/artificer = user
+			var/artificer_skill = artificer.get_skill_level(skill_used)
+			if(M == artificer)
+				to_chat(artificer, span_warning("Repairing myself is difficult..."))
+				used_time += 3 SECONDS //repairing yourself as a construct is logistically going to be a lot more difficult than someone else doing it for you
+			if(artificer.mind)
+				used_time -= (artificer_skill * 1 SECONDS)
+			playsound(loc, 'sound/items/bsmith1.ogg', 100, FALSE)
+			if(!do_mob(artificer, M, used_time))
+				return
+			playsound(loc, 'sound/items/bsmith4.ogg', 100, FALSE)
+
+			var/brute_heal = (affecting.brute_dam / 2) + 5 // Heals ONE limb at a time.
+			var/burn_heal = (affecting.burn_dam / 2) + 5
+			affecting.heal_damage(brute_heal, burn_heal)
+
+			if(affecting.brute_dam == 0 && affecting.burn_dam == 0)
+				affecting.heal_wounds(20)//heal wounds twice as fast if there's no other damage to patch up
 			else
-				H.heal_wounds(10) // Other heal are far more powerful and can heal skullcrack in 15 hits instead of 75
+				affecting.heal_wounds(10) // Other heal are far more powerful and can heal skullcrack in 15 hits instead of 75
 			H.update_damage_overlays()
-		if(M == user)
-			user.visible_message(span_notice("[user] hammers [user.p_their()] [affecting]."), span_notice("I hammer my [affecting]."))
-		else
-			user.visible_message(span_notice("[user] hammers [M]'s [affecting]."), span_notice("I hammer [M]'s [affecting]."))
-		if(wCount.len > 0)
-			// Auto repeat healing
-			hammerheal(M, user)
+
+			if(M == artificer)
+				artificer.visible_message(span_notice("[artificer] hammers [artificer.p_their()] [affecting]."), span_notice("I hammer my [affecting]."))
+			else
+				artificer.visible_message(span_notice("[artificer] hammers [M]'s [affecting]."), span_notice("I hammer [M]'s [affecting]."))
+
+			if(artificer.mind)
+				artificer.mind.add_sleep_experience(skill_used, artificer.STAINT) // a lil smidge of XP for the repairing individual :3
+
+			if(affecting.get_damage() == 0 && !length(affecting.wounds))//if the bodypart has no damage nor wounds on it...
+				if(M == artificer)
+					to_chat(artificer, span_warning("My [affecting.name] is undamaged."))
+				else
+					to_chat(artificer, span_warning("[M]'s [affecting.name] is undamaged."))
+				return
 	else //Non-construct.
 		to_chat(user, span_warning("I can't tinker on living flesh!"))
 
