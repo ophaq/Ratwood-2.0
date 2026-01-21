@@ -50,6 +50,7 @@
 #define WRISTSLEEVE_LAYER		22
 #define ARMORSLEEVE_LAYER		21
 #define GLOVESLEEVE_LAYER		20
+#define RING_LAYER				19
 #define GLASSES_LAYER			18
 #define NECK_LAYER				17
 #define CLOAK_LAYER				16		//only when looking north or west/east
@@ -71,7 +72,8 @@
 #define TURF_LAYER				0		//If you're on fire
 #define BODY_ADJ_LAYER			(ARM_MARKING_LAYER)		//legacy define, redirects to ARM_MARKING_LAYER
 #define TOTAL_LAYERS			54		//KEEP THIS UP-TO-DATE OR SHIT WILL BREAK ;_;
-#define TOTAL_LAYERS			54		//KEEP THIS UP-TO-DATE OR SHIT WILL BREAK ;_;
+
+#define BACK_CLOAK_SOUTH_LAYER		(BODY_BEHIND_LAYER+1)
 
 #define BACK_CLOAK_SOUTH_LAYER		(BODY_BEHIND_LAYER+1)
 
