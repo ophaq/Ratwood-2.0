@@ -119,6 +119,9 @@
 //	var/specific_layer = aux ? aux_layer : BODYPARTS_LAYER
 	var/specific_layer = aux_layer ? aux_layer : BODYPARTS_LAYER
 	var/specific_render_zone = aux ? aux_zone : body_zone
+	// ARM markings should render at ARM_MARKING_LAYER when on arm body zones
+	if(!aux && (specific_render_zone == BODY_ZONE_L_ARM || specific_render_zone == BODY_ZONE_R_ARM))
+		specific_layer = ARM_MARKING_LAYER
 	for(var/key in specific_markings)
 		var/color = specific_markings[key]
 		var/datum/body_marking/BM = GLOB.body_markings[key]

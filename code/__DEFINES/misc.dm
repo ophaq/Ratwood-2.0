@@ -26,7 +26,6 @@
 #define BODY_BEHIND_LAYER		47		//certain mutantrace features (tail when looking south) that must appear behind the body parts
 #define BODY_UNDER_LAYER		46		// Things under the bodyparts but above the "behind body" layer
 #define BODYPARTS_LAYER			45		//Initially "AUGMENTS", this was repurposed to be a catch-all bodyparts flag
-#define BODY_ADJ_LAYER			44		//certain mutantrace features (snout, body markings) that must appear above the body parts
 #define BODY_LAYER				43		//underwear, undershirts, socks, eyes, lips(makeup)
 #define FRONT_MUTATIONS_LAYER	42		//mutations that should appear above body, body_adj and bodyparts layer (e.g. laser eyes)
 #define DAMAGE_LAYER			41		//damage indicators (cuts and burns)
@@ -38,38 +37,40 @@
 #define LEGSLEEVE_LAYER			35
 #define SHOESLEEVE_LAYER		34
 #define SHIRT_LAYER				33
-#define WRISTS_LAYER			32
-#define ARMOR_LAYER				31
-#define TABARD_LAYER			30
-#define BELT_LAYER				29		//only when looking south
-#define UNDER_CLOAK_LAYER		28
-#define HANDS_PART_LAYER		27
+#define HANDS_PART_LAYER		32
+#define WRISTS_LAYER			31
+#define ARMOR_LAYER				30
+#define TABARD_LAYER			29
+#define BELT_LAYER				28		//only when looking south
+#define UNDER_CLOAK_LAYER		27
 #define GLOVES_LAYER			26
 #define ARM_DAMAGE_LAYER		25
 #define SHIRTSLEEVE_LAYER		24
 #define WRISTSLEEVE_LAYER		23
 #define ARMORSLEEVE_LAYER		22
 #define GLOVESLEEVE_LAYER		21
-#define RING_LAYER				20
-#define GLASSES_LAYER			19
-#define NECK_LAYER				18
-#define CLOAK_LAYER				17		//only when looking north or west/east
-#define HOOD_LAYER				16
-#define HAIR_LAYER				15		//TODO: make part of head layer?
-#define MASK_LAYER				14
-#define HAIREXTRA_LAYER			13
-#define MOUTH_LAYER				12
-#define HEAD_LAYER				11
-#define BACK_LAYER				10		//only when looking north
-#define HANDS_LAYER				9
-#define HANDCUFF_LAYER			8
-#define LEGCUFF_LAYER			7
-#define BODY_FRONT_LAYER		6
-#define BODY_FRONT_FRONT_LAYER	5
-#define HALO_LAYER				4		//blood cult ascended halo, because there's currently no better solution for adding/removing
-#define SUNDER_LAYER			3
-#define FIRE_LAYER				2		//If you're on fire
-#define TURF_LAYER				1		//If you're on fire
+#define RING_LAYER				19
+#define ARM_MARKING_LAYER		18		//arm stripes and markings - must be LOWER than sleeve layers
+#define GLASSES_LAYER			17
+#define NECK_LAYER				16
+#define CLOAK_LAYER				15		//only when looking north or west/east
+#define HOOD_LAYER				14
+#define HAIR_LAYER				13		//TODO: make part of head layer?
+#define MASK_LAYER				12
+#define HAIREXTRA_LAYER			11
+#define MOUTH_LAYER				10
+#define HEAD_LAYER				9
+#define BACK_LAYER				8		//only when looking north
+#define HANDS_LAYER				7
+#define HANDCUFF_LAYER			6
+#define LEGCUFF_LAYER			5
+#define BODY_FRONT_LAYER		4
+#define BODY_FRONT_FRONT_LAYER	3
+#define HALO_LAYER				2		//blood cult ascended halo, because there's currently no better solution for adding/removing
+#define SUNDER_LAYER			1
+#define FIRE_LAYER				0		//If you're on fire
+#define TURF_LAYER				-1		//If you're on fire
+#define BODY_ADJ_LAYER			(ARM_MARKING_LAYER)		//legacy define, redirects to ARM_MARKING_LAYER
 #define TOTAL_LAYERS			54		//KEEP THIS UP-TO-DATE OR SHIT WILL BREAK ;_;
 
 #define BACK_CLOAK_SOUTH_LAYER		(BODY_BEHIND_LAYER+1)
