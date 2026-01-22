@@ -135,6 +135,8 @@
 	if(blunt_chipping)
 		var/chip_strength
 		switch(blunt_chip_strength)
+			if(BLUNT_CHIP_MINUSCULE)
+				chip_strength = "minuscule"
 			if(BLUNT_CHIP_WEAK)
 				chip_strength = "middling"
 			if(BLUNT_CHIP_STRONG)
