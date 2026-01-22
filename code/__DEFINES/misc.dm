@@ -75,8 +75,6 @@
 
 #define BACK_CLOAK_SOUTH_LAYER		(BODY_BEHIND_LAYER+1)
 
-#define BACK_CLOAK_SOUTH_LAYER		(BODY_BEHIND_LAYER+1)
-
 //Human Overlay Index Shortcuts for alternate_worn_layer, layers
 //Because I *KNOW* somebody will think layer+1 means "above"
 //IT DOESN'T OK, IT MEANS "UNDER"
