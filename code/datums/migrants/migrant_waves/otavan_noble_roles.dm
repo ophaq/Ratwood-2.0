@@ -79,7 +79,7 @@
 	tutorial = "Whether through merit, blood or renown, you became a knight in service of the Otavan court. Now, tasked with escorting the Émissaire and protecting them at all cost, you ride into the Vale."
 	outfit = /datum/outfit/job/roguetown/otavan/knight
 	traits_applied = list(TRAIT_HEAVYARMOR, TRAIT_STEELHEARTED, TRAIT_NOBLE, TRAIT_OUTLANDER)
-	category_tags = list(CTAG_GRENZEL_GUARD)
+	category_tags = list(CTAG_OTAVAN_KNIGHT)
 	subclass_stats = list(
 		STATKEY_STR = 2,
 		STATKEY_WIL = 3,
@@ -199,7 +199,7 @@
 	name = "Psydonite Preacher"		//Basically a middle ground between a disciple and an adventurer monk. Staves and preaching
 	outfit = /datum/outfit/job/roguetown/otavan/preacher
 	traits_applied = list(TRAIT_CRITICAL_RESISTANCE, TRAIT_STEELHEARTED, TRAIT_SILVER_BLESSED, TRAIT_OUTLANDER)
-	category_tags = list(CTAG_OTAVAN_GUARD)
+	category_tags = list(CTAG_OTAVAN_PREACHER)
 	subclass_stats = list(
 		STATKEY_STR = 1,
 		STATKEY_PER = 1,
