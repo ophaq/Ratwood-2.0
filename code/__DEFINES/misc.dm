@@ -71,7 +71,7 @@
 #define FIRE_LAYER				1		//If you're on fire
 #define TURF_LAYER				0		//If you're on fire
 #define BODY_ADJ_LAYER			(ARM_MARKING_LAYER)		//legacy define, redirects to ARM_MARKING_LAYER
-#define TOTAL_LAYERS			54		//KEEP THIS UP-TO-DATE OR SHIT WILL BREAK ;_;
+#define TOTAL_LAYERS			55		//KEEP THIS UP-TO-DATE OR SHIT WILL BREAK ;_;
 
 #define BACK_CLOAK_SOUTH_LAYER		(BODY_BEHIND_LAYER+1)
 
