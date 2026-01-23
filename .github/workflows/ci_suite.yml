@@ -70,8 +70,9 @@ jobs:
       
       - name: Install BYOND
         run: |
+          sudo dpkg --add-architecture i386
           sudo apt-get update -qq
-          sudo apt-get install -y make gcc unzip curl:i386
+          sudo apt-get install -y make gcc unzip libcurl4-openssl:i386
           bash tools/ci/install_byond.sh
 
       - name: Compile BYOND project
